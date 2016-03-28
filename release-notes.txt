@@ -1,1 +1,36 @@
-Release notes for Steam Customizer Skin Manager program
+28th of March 2016
+One Year Later.
+
+Version 1.0 BETA Released
+
+Basic Steam Skin manager that handles compiling
+
+Includes the following features:
+
+- Listing Skins
+- Lising Metadata
+- Adding Metadata for existing skins (10 most popular)
+- Languages
+- Exporting as ZIP or STSKIN
+- Update check
+
+Packed in a NSIS installer (setup.exe).
+Includes some other supporting files:
+
+Example.stskin
+Readme.txt
+MUI folder
+extras (metadata)
+Compiler binary
+
+-------
+
+Behavior:
+
+On windows it creates a shell association with StSkin file format (currently unused by anything). Adds icon to StSkin files. 
+
+Opening a StSkin file with the app launches the installation sequence automatically; compiles the skin, applies the skin and restarts Steam.
+
+Does not run in the background or as a daemon. 
+
+Checks for updates once per day (in case there's critical fixes)
