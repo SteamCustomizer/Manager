@@ -1,0 +1,7 @@
+[STSkinUpdates]
+AppVersion=1.0
+AppDownloadURL=https://github.com/SteamCustomizer/Manager/raw/master/setup.exe
+AppDownloadAUX=http://steamcustomizer.com/download/current/setup.exe
+SideNote=Release notes:
+ForceUpdate=0
+SkinCoreVersion=1.0
