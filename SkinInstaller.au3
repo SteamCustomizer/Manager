@@ -624,7 +624,7 @@ EndFunc   ;==>MyTestFunc
 
 Func Update()
 
-Global $GetVersion = InetGet("http://localhost/update/up.dt", @TempDir & "\version.dt", 1, 1)
+Global $GetVersion = InetGet("https://raw.githubusercontent.com/SteamCustomizer/Manager/master/update/up.dt", @TempDir & "\version.dt", 1, 1)
 Do
 Until InetGetInfo($GetVersion, 2)
 InetClose($GetVersion)
