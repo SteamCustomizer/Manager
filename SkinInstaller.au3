@@ -48,6 +48,21 @@ $sLangRemember = FileReadLine("settings.ini", 1)
 
 
 
+SetError(0)
+
+RegRead("HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\NET Framework Setup\NDP\v3.5\","Install")
+
+If @error <> 0 Then
+
+MsgBox(0,"Info", ".NET v3.5 or higher is required!")
+ShellExecute("https://www.microsoft.com/en-gb/download/details.aspx?id=21")
+Exit
+
+EndIf
+
+
+
+
 $sLanguageIni = @ProgramFilesDir & '\Steam Customizer\MUI\' & $sLangRemember & '.ini'
 $sNoSkinsInstalled = IniRead($sLanguageIni, "SteamSkinLanguage", "sNoSkinsInstalled", "No Skins Installed, why not get one or make one on SteamCustomizer.com?")
 $sApply = IniRead($sLanguageIni, "SteamSkinLanguage", "Apply", "Apply")
@@ -207,9 +222,9 @@ Local $idExportZip = GUICtrlCreateMenuItem($sExportZip, $idFilemenu)
 GUICtrlCreateMenuItem("", $idFilemenu, 2)
 Local $idExit = GUICtrlCreateMenuItem($sExit, $idFilemenu)
 Local $idEditmenu = GUICtrlCreateMenu($sEdit)
-Local $idAddMetadata = GUICtrlCreateMenuItem($sChangeMetadata, $idEditmenu)
-Local $idAddPreview = GUICtrlCreateMenuItem($sChangePreview, $idEditmenu)
-GUICtrlCreateMenuItem("", $idEditmenu, 2)
+;Local $idAddMetadata = GUICtrlCreateMenuItem($sChangeMetadata, $idEditmenu)
+;Local $idAddPreview = GUICtrlCreateMenuItem($sChangePreview, $idEditmenu)
+;GUICtrlCreateMenuItem("", $idEditmenu, 2)
 Local $idRefresh = GUICtrlCreateMenuItem($sRefresh, $idEditmenu)
 Local $idOptionsmenu = GUICtrlCreateMenu($sOptions)
 Local $idUpdate = GUICtrlCreateMenuItem($sCheckForUpdates, $idOptionsmenu)
@@ -315,42 +330,42 @@ Case $idAboutmenu
 
 
 About()
-Case $idAddMetadata
+;Case $idAddMetadata
+;
+;
+;				  $sSel = GUICtrlRead($mylist)
+;				  FileCopy ("template.ini", $sVar & '/skins/' & $sSel & '/metadata.ini',  $FC_NOOVERWRITE)
+;				  FileCopy ("blank.jpg", $sVar & '/skins/' & $sSel & '/thumb.jpg',  $FC_NOOVERWRITE)
+;				  ShellExecute("notepad.exe", $sVar & '/skins/' & $sSel & '/metadata.ini')
+;
+; Case $idAddPreview
 
-
-				  $sSel = GUICtrlRead($mylist)
-				  FileCopy ("template.ini", $sVar & '/skins/' & $sSel & '/metadata.ini',  $FC_NOOVERWRITE)
-				  FileCopy ("blank.jpg", $sVar & '/skins/' & $sSel & '/thumb.jpg',  $FC_NOOVERWRITE)
-				  ShellExecute("notepad.exe", $sVar & '/skins/' & $sSel & '/metadata.ini')
-
- Case $idAddPreview
-
-
-						 Local Const $sMessage = $sBrowseForJpg
-					  ; Display an open dialog to select a list of file(s).
-					  Local $sFileOpenDialog = FileOpenDialog($sMessage, @WindowsDir & "\", "JPG Files (*.jpg)", $FD_FILEMUSTEXIST)
-					  If @error Then
-						  ; Display the error message.
-						  ;MsgBox($MB_SYSTEMMODAL, "", $sNoFileSelected)
-						  ; Change the working directory (@WorkingDir) back to the location of the script directory as FileOpenDialog sets it to the last accessed folder.
-						  FileChangeDir(@ScriptDir)
-					  Else
-						  ; Change the working directory (@WorkingDir) back to the location of the script directory as FileOpenDialog sets it to the last accessed folder.
-						  FileChangeDir(@ScriptDir)
-						  ; Replace instances of "|" with @CRLF in the string returned by FileOpenDialog.
-						  $sFileOpenDialogPreview = StringReplace($sFileOpenDialog, "|", @CRLF)
-
-
-
-				  $sSel = GUICtrlRead($mylist)
-
-						FileCopy ($sFileOpenDialogPreview, $sVar & '/skins/' & $sSel & '/thumb.jpg', $FC_OVERWRITE)
-						FileCopy ("template.ini", $sVar & '/skins/' & $sSel & '/metadata.ini',  $FC_NOOVERWRITE)
-
-
-					 _RestartProgram()
-
-    EndIf
+;
+;						 Local Const $sMessage = $sBrowseForJpg
+;					  ; Display an open dialog to select a list of file(s).
+;					  Local $sFileOpenDialog = FileOpenDialog($sMessage, @WindowsDir & "\", "JPG Files (*.jpg)", $FD_FILEMUSTEXIST)
+;					  If @error Then
+;						  ; Display the error message.
+;						  ;MsgBox($MB_SYSTEMMODAL, "", $sNoFileSelected)
+;						  ; Change the working directory (@WorkingDir) back to the location of the script directory as FileOpenDialog sets it to the last accessed folder.
+;						  FileChangeDir(@ScriptDir)
+;					  Else
+;						  ; Change the working directory (@WorkingDir) back to the location of the script directory as FileOpenDialog sets it to the last accessed folder.
+;						  FileChangeDir(@ScriptDir)
+;						  ; Replace instances of "|" with @CRLF in the string returned by FileOpenDialog.
+;						  $sFileOpenDialogPreview = StringReplace($sFileOpenDialog, "|", @CRLF)
+;
+;
+;
+;				  $sSel = GUICtrlRead($mylist)
+;
+;						FileCopy ($sFileOpenDialogPreview, $sVar & '/skins/' & $sSel & '/thumb.jpg', $FC_OVERWRITE)
+;						FileCopy ("template.ini", $sVar & '/skins/' & $sSel & '/metadata.ini',  $FC_NOOVERWRITE)
+;
+;
+;					 _RestartProgram()
+;
+;    EndIf
 
 
 
@@ -481,9 +496,9 @@ $SecondTrim = StringTrimRight($FirstTrim, 1)
 	  $sReadBGColor = IniRead($sFilePathMetadata, "Skin", "AccentColor", "0xFFFFFF")
 	  $sReadTextColor = IniRead($sFilePathMetadata, "Skin", "AccentTextColor", "0x000000")
 	  $sReadRating = IniRead($sFilePathMetadata, "Skin", "Rating", "¡¡¡¡¡")
-	  $sReadAuthor = IniRead($sFilePathMetadata, "Template", "Author", $sUnknown)
+	  $sReadAuthor = IniRead($sFilePathMetadata, "Skin", "Author", $sUnknown)
 	  $sReadAuthorURL = IniRead($sFilePathMetadata, "Template", "AuthorURL", "http://steamcustomizer.com")
-	  $sReadSkinURL = IniRead($sFilePathMetadata, "Template", "SkinURL", "http://steamcustomizer.com")
+	  $sReadSkinURL = IniRead($sFilePathMetadata, "Skin", "SkinURL", "http://steamcustomizer.com")
 	  $sReadReadDescription = IniRead($sFilePathMetadata, "Template", "Description", $sNoDescription)
 	  $sReadVersion = IniRead($sFilePathMetadata, "Template", "Version", "?")
 
