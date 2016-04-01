@@ -287,8 +287,9 @@ Local $FileList = _FileListToArray($sVar & '\skins', "*.*", 2)
 								  $MyBox = MsgBox(1, "", $sNoSkinsInstalled)
 								  If $MyBox == 1 Then
 				  ShellExecute ("http://steamcustomizer.com/")
-				  ElseIf $MyBox == 2 Then
-				  Exit
+			   ElseIf $MyBox == 2 Then
+				  DirCreate($sVar & '\skins\Blank')
+				  _RestartProgram()
 				  EndIf
 
             EndIf
@@ -297,8 +298,9 @@ Local $FileList = _FileListToArray($sVar & '\skins', "*.*", 2)
 				  $MyBox = MsgBox(1, "", $sNoSkinsInstalled)
 				  If $MyBox == 1 Then
 				  ShellExecute ("http://steamcustomizer.com/")
-				  ElseIf $MyBox == 2 Then
-				  Exit
+			   ElseIf $MyBox == 2 Then
+				  DirCreate($sVar & '\skins\Blank')
+				  _RestartProgram()
 				  EndIf
                 Exit
             EndIf
