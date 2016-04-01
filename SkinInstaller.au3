@@ -64,7 +64,7 @@ EndIf
 
 
 $sLanguageIni = @ProgramFilesDir & '\Steam Customizer\MUI\' & $sLangRemember & '.ini'
-$sNoSkinsInstalled = IniRead($sLanguageIni, "SteamSkinLanguage", "sNoSkinsInstalled", "No Skins Installed, why not get one or make one on SteamCustomizer.com?")
+$sNoSkinsInstalled = IniRead($sLanguageIni, "SteamSkinLanguage", "sNoSkinsInstalled", "No Skins Installed, why not get one or make one on SteamCustomizer.com? Please double click a StSkin to install it. (Instead of File - Open)")
 $sApply = IniRead($sLanguageIni, "SteamSkinLanguage", "Apply", "Apply")
 $sDelete = IniRead($sLanguageIni, "SteamSkinLanguage", "Delete", "Delete")
 $sGetMoreSkins = IniRead($sLanguageIni, "SteamSkinLanguage", "GetMoreSkins", "Get more skins")
