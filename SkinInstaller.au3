@@ -1,7 +1,7 @@
 #NoTrayIcon
 #Region ;**** Directives created by AutoIt3Wrapper_GUI ****
-#AutoIt3Wrapper_Icon=main.ico
-#AutoIt3Wrapper_Icon_Add=manager.ico
+#AutoIt3Wrapper_Icon=new.ico
+#AutoIt3Wrapper_Icon_Add=new.ico
 #AutoIt3Wrapper_Outfile=SkinManager.exe
 #AutoIt3Wrapper_UseUpx=n
 #AutoIt3Wrapper_Res_Comment=Made for SteamCustomizer.com
@@ -232,6 +232,16 @@ Local $idMetadatamenu = GUICtrlCreateMenuItem($sMetadata, $idOptionsmenu)
 Local $idLangmenu = GUICtrlCreateMenu($sLanguage, $idOptionsmenu, 1)
 Local $idLangitem1 = GUICtrlCreateMenuItem("English", $idLangmenu)
 Local $idLangitem2 = GUICtrlCreateMenuItem("Русский", $idLangmenu)
+Local $idLangitem3 = GUICtrlCreateMenuItem("Deutsch", $idLangmenu)
+Local $idLangitem4 = GUICtrlCreateMenuItem("Español", $idLangmenu)
+Local $idLangitem5 = GUICtrlCreateMenuItem("Français", $idLangmenu)
+Local $idLangitem6 = GUICtrlCreateMenuItem("Dansk", $idLangmenu)
+Local $idLangitem7 = GUICtrlCreateMenuItem("Nederlands", $idLangmenu)
+Local $idLangitem8 = GUICtrlCreateMenuItem("Português", $idLangmenu)
+Local $idLangitem9 = GUICtrlCreateMenuItem("Română", $idLangmenu)
+Local $idLangitem10 = GUICtrlCreateMenuItem("Polski", $idLangmenu)
+Local $idLangitem11 = GUICtrlCreateMenuItem("Tiếng Việt", $idLangmenu)
+Local $idLangitem12 = GUICtrlCreateMenuItem("British", $idLangmenu)
 
 Local $idAboutmenuM = GUICtrlCreateMenu("?")
 Local $idAboutmenu = GUICtrlCreateMenuItem($sAbout, $idAboutmenuM)
@@ -298,6 +308,8 @@ Local $FileList = _FileListToArray($sVar & '\skins', "*.*", 2)
 				  $MyBox = MsgBox(1, "", $sNoSkinsInstalled)
 				  If $MyBox == 1 Then
 				  ShellExecute ("http://steamcustomizer.com/")
+				  DirCreate($sVar & '\skins\Blank')
+				  _RestartProgram()
 			   ElseIf $MyBox == 2 Then
 				  DirCreate($sVar & '\skins\Blank')
 				  _RestartProgram()
@@ -458,6 +470,45 @@ Case $idLangitem2
 _FileWriteToLine("settings.ini", 1, "Russian", True)
 _RestartProgram()
 
+Case $idLangitem3
+_FileWriteToLine("settings.ini", 1, "German", True)
+_RestartProgram()
+
+Case $idLangitem4
+_FileWriteToLine("settings.ini", 1, "Spanish", True)
+_RestartProgram()
+
+Case $idLangitem5
+_FileWriteToLine("settings.ini", 1, "French", True)
+_RestartProgram()
+
+Case $idLangitem6
+_FileWriteToLine("settings.ini", 1, "Danish", True)
+_RestartProgram()
+
+Case $idLangitem7
+_FileWriteToLine("settings.ini", 1, "Dutch", True)
+_RestartProgram()
+
+Case $idLangitem8
+_FileWriteToLine("settings.ini", 1, "Portuguese", True)
+_RestartProgram()
+
+Case $idLangitem9
+_FileWriteToLine("settings.ini", 1, "Romanian", True)
+_RestartProgram()
+
+Case $idLangitem10
+_FileWriteToLine("settings.ini", 1, "Polish", True)
+_RestartProgram()
+
+Case $idLangitem11
+_FileWriteToLine("settings.ini", 1, "Vietnamese", True)
+_RestartProgram()
+
+Case $idLangitem12
+_FileWriteToLine("settings.ini", 1, "British", True)
+_RestartProgram()
 
 
 	Case $mylist
