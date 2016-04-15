@@ -139,7 +139,7 @@ Func _Main()
 
 
 GUICtrlCreateEdit(_GetFile($sFilePath), 10, 5, 350, 65) ; If a file was passed via commandline then random text will appear in the GUICtrlCreateEdit().
-SteamCustomizer_Compile($CmdLine[1], Null, $bNoBackup, $bActivate, $bRestart)
+SteamCustomizer_Compile($CmdLine[1], Null, @ScriptDir & "/bases", $bNoBackup, $bActivate, $bRestart)
 Exit
 
 EndFunc

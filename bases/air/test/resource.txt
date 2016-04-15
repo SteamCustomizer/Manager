@@ -1,0 +1,7 @@
+"test/resource.txt"	
+{
+	"node"	
+	{
+		"key" value
+	}
+}

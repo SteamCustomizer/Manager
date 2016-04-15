@@ -5,10 +5,10 @@ Global $SC_COMPILER_PATH = "bin\compiler.exe"
 Global $SC_STEAM_HKEY_PATH = "HKEY_CURRENT_USER\Software\Valve\Steam"
 ;Global $iExitCode
 
-Func SteamCustomizer_Compile($sTmplateFile, $sSteamPath = Null, $bNoBackup = False, $bActivate = True, $bRestart = False)
+Func SteamCustomizer_Compile($sSkinFile, $sSteamPath = Null, $sBasePath = Null, $bNoBackup = False, $bActivate = True, $bRestart = False)
 	If Not $sSteamPath Then $sSteamPath = RegRead($SC_STEAM_HKEY_PATH, "SteamPath")
-	;$iExitCode = RunWait($SC_COMPILER_PATH & ' -d "' & $sTmplateFile & '" -s "' & $sSteamPath & '"' & ($bNoBackup == True ? " -b" : "") & ($bActivate == True ? " -a" : ""), "", @SW_HIDE)
-	$iPid = Run($SC_COMPILER_PATH & ' -d "' & $sTmplateFile & '" -s "' & $sSteamPath & '"' & ($bNoBackup == True ? " -b" : "") & ($bActivate == True ? " -a" : ""), "", @SW_HIDE, $STDERR_CHILD + $STDOUT_CHILD)
+	$sLaunchCmd = $SC_COMPILER_PATH & ' --file "' & $sSkinFile & '" --steam "' & $sSteamPath & '"' & ($sBasePath = Null ? '' : ' --base "' & $sBasePath & '"') & ($bNoBackup = True ? ' --nobackup' : '') & ($bActivate = True ? ' --activate' : '');
+	$iPid = Run($sLaunchCmd, "", @SW_HIDE, $STDERR_CHILD + $STDOUT_CHILD)
 	$hHandle = _ProcessOpenHandle($iPid)
 	
 	$stdout = ""

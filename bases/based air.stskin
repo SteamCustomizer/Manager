@@ -1,0 +1,29 @@
+{
+  "metadata": {
+    "template": {
+      "name": "Air for Steam",
+      "version": 1458416327,
+      "skinBase": "air",
+      "author": "Steam Customizer",
+      "authorUrl": "http://www.steamcustomizer.com",
+      "description": "Default Steam experience - enhanced"
+    },
+	"skin": {
+		"primaryColor": "000000",
+		"primaryTextColor": "000000"
+	}
+  },
+  "files": {
+    "test/resource.txt": {
+      "change": {
+
+
+        "node": {
+			
+			"key": "sey"
+
+        }
+      }
+    }
+  }
+}
