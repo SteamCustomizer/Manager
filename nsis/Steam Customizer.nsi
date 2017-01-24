@@ -8,19 +8,24 @@
 !define COMP_NAME "Blumont"
 !define WEB_SITE "http://steamcustomizer.com/"
 !define VERSION "1.00.00.00"
-!define COPYRIGHT "Blumont © 2016"
+!define COPYRIGHT "Blumont © 2017"
 !define DESCRIPTION "Application"
 !define FILENAME "Application"
 !define PUBLISHER "Application"
 !define LICENSE_TXT "I:\Users\User\Google Drive\Projects\SteamCustomizer\Steam Customizer\installer1\license.txt"
 !define FILEDESCRIPTION "Application"
-!define INSTALLER_NAME "I:\Users\User\Desktop\Output\Steam Customizer\setup.exe"
+!define INSTALLER_NAME "I:\Users\User\Desktop\setup.exe"
 !define MAIN_APP_EXE "SkinInstaller.exe"
 !define INSTALL_TYPE "SetShellVarContext current"
 !define REG_ROOT "HKCU"
 !define REG_APP_PATH "Software\Microsoft\Windows\CurrentVersion\App Paths\${MAIN_APP_EXE}"
 !define UNINSTALL_PATH "Software\Microsoft\Windows\CurrentVersion\Uninstall\${APP_NAME}"
 !include "FileAssociation.nsh"
+
+!define NETVersion "3.5"
+!define NETInstaller "dotNetFx35setup.exe"
+
+
 
 
 
@@ -54,6 +59,10 @@ InstallDir "$PROGRAMFILES\Steam Customizer"
 
 
 
+
+
+
+
 !define MUI_ICON "icon.ico"
 !define MUI_UNICON "un_icon.ico"
 
@@ -72,6 +81,15 @@ InstallDir "$PROGRAMFILES\Steam Customizer"
 !define MUI_UNABORTWARNING
 
 !insertmacro MUI_PAGE_WELCOME
+
+!define MUI_FINISHPAGE_RUN
+!define MUI_FINISHPAGE_RUN_TEXT "Create desktop shortcut"
+!define MUI_FINISHPAGE_RUN_FUNCTION "myfunction"
+
+Function "myfunction"
+CreateShortCut "$DESKTOP\${APP_NAME}.lnk" "$INSTDIR\${MAIN_APP_EXE}"
+FunctionEnd
+
 
 
 !ifdef LICENSE_TXT
@@ -98,6 +116,25 @@ InstallDir "$PROGRAMFILES\Steam Customizer"
 !insertmacro MUI_UNPAGE_FINISH
 
 !insertmacro MUI_LANGUAGE "English"
+
+
+
+Section "MS .NET Framework v${NETVersion}" SecFramework
+  IfFileExists "$WINDIR\Microsoft.NET\Framework\v${NETVersion}" NETFrameworkInstalled 0
+  File /oname=$TEMP\${NETInstaller} ${NETInstaller}
+ 
+  DetailPrint "Starting Microsoft .NET Framework v${NETVersion} Setup..."
+  ExecWait "$TEMP\${NETInstaller}"
+  Return
+ 
+  NETFrameworkInstalled:
+  DetailPrint "Microsoft .NET Framework is already installed!"
+ 
+SectionEnd
+
+
+
+
 
 
 
@@ -135,6 +172,7 @@ SetShellVarContext all
 CreateDirectory "$SMPROGRAMS\$SM_Folder"
 CreateShortCut "$SMPROGRAMS\$SM_Folder\${APP_NAME}.lnk" "$INSTDIR\${MAIN_APP_EXE}"
 CreateShortCut "$SMPROGRAMS\$SM_Folder\Uninstall ${APP_NAME}.lnk" "$INSTDIR\uninstall.exe"
+
 
 !ifdef WEB_SITE
 WriteIniStr "$INSTDIR\${APP_NAME} website.url" "InternetShortcut" "URL" "${WEB_SITE}"
@@ -222,6 +260,7 @@ RmDir "$SMPROGRAMS\$SM_Folder"
 Delete "$SMPROGRAMS\Steam Customizer\${APP_NAME} Website.lnk"
 Delete "$SMPROGRAMS\Steam Customizer\README.lnk" 
 Delete "$SMPROGRAMS\Steam Customizer\Skin Manager.lnk" 
+Delete "$DESKTOP\${APP_NAME}.lnk"
 RmDir "$SMPROGRAMS\$SM_Folder"
 !endif
 RmDir "$SMPROGRAMS\Steam Customizer"
